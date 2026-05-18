@@ -1,0 +1,36 @@
+name: Build APK
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Kaynak kodu indir
+        uses: actions/checkout@v3
+
+      - name: Java 17 kur
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Gradle wrapper indir
+        run: |
+          mkdir -p gradle/wrapper
+          curl -sL "https://github.com/gradle/gradle/raw/v8.4.0/gradle/wrapper/gradle-wrapper.jar" \
+            -o gradle/wrapper/gradle-wrapper.jar
+          chmod +x gradlew
+
+      - name: APK derle
+        run: ./gradlew assembleRelease
+
+      - name: APK'yı artifact olarak yükle
+        uses: actions/upload-artifact@v3
+        with:
+          name: kapi-ac-apk
+          path: app/build/outputs/apk/release/app-release-unsigned.apk
