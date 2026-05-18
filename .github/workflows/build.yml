@@ -11,10 +11,10 @@ jobs:
 
     steps:
       - name: Kaynak kodu indir
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Java 17 kur
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
@@ -30,7 +30,7 @@ jobs:
         run: ./gradlew assembleRelease
 
       - name: APK'yı artifact olarak yükle
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: kapi-ac-apk
           path: app/build/outputs/apk/release/app-release-unsigned.apk
