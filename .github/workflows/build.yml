@@ -19,18 +19,17 @@ jobs:
           distribution: temurin
           java-version: 17
 
-      - name: Gradle wrapper hazırla
-        run: chmod +x ./gradlew
+      - name: Gradle kur
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: 8.4
 
       - name: Mipmap icon dosyalarını temizle
         run: |
           find app/src/main/res/mipmap-* -type f -name "*.xml" -delete || true
 
       - name: APK derle
-        run: ./gradlew assembleDebug
-
-      - name: APK dosyalarını listele
-        run: find app/build/outputs -type f -name "*.apk"
+        run: gradle assembleDebug --no-daemon
 
       - name: APK dosyasını bul
         run: find . -type f -name "*.apk" -print
