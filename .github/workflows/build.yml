@@ -1,4 +1,4 @@
-name: Build APK
+name: Android APK Build
 
 on:
   push:
@@ -16,25 +16,20 @@ jobs:
       - name: Java 17 kur
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
-          distribution: 'temurin'
+          distribution: temurin
+          java-version: 17
 
-      - name: Gradle wrapper hazırla
-        run: |
-          mkdir -p gradle/wrapper
-          curl -sL "https://services.gradle.org/distributions/gradle-8.4-bin.zip" -o /tmp/gradle.zip
-          unzip -q /tmp/gradle.zip -d /tmp/gradle-dist
-          /tmp/gradle-dist/gradle-8.4/bin/gradle wrapper --gradle-version 8.4
-          chmod +x gradlew
+      - name: Gradle izni ver
+        run: chmod +x ./gradlew
 
       - name: APK derle
         run: ./gradlew assembleRelease
-        
-      - name: APK konumunu bul
-        run: find app/build/outputs -name "*.apk" 2>/dev/null || echo "APK bulunamadı"
+
+      - name: APK dosyalarını listele
+        run: find app/build/outputs/apk -type f
 
       - name: APK'yı artifact olarak yükle
         uses: actions/upload-artifact@v4
         with:
-          name: kapi-ac-apk
-          path: app/build/outputs/apk/**/*.apk
+          name: release-apk
+          path: app/build/outputs/apk/release/*.apk
