@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.ZKTeko" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">#0A0A0A</item>
+        <item name="android:statusBarColor">#0A0A0A</item>
+        <item name="android:navigationBarColor">#0A0A0A</item>
+        <item name="colorPrimary">#C8F544</item>
+        <item name="colorAccent">#C8F544</item>
+    </style>
+</resources>
