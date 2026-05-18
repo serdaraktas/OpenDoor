@@ -19,6 +19,9 @@ jobs:
           distribution: temurin
           java-version: 17
 
+      - name: Bozuk Gradle wrapper jar dosyasını sil
+        run: rm -f gradle/wrapper/gradle-wrapper.jar
+
       - name: Gradle kur
         uses: gradle/actions/setup-gradle@v4
         with:
