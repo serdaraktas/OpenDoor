@@ -27,7 +27,7 @@ jobs:
           find app/src/main/res/mipmap-* -type f -name "*.xml" -delete || true
 
       - name: APK derle
-        run: ./gradlew assembleRelease
+        run: ./gradlew assembleDebug
 
       - name: APK dosyalarını listele
         run: find app/build/outputs -type f -name "*.apk"
@@ -38,5 +38,5 @@ jobs:
       - name: APK'yı artifact olarak yükle
         uses: actions/upload-artifact@v4
         with:
-          name: release-apk
+          name: debug-apk
           path: "**/*.apk"
