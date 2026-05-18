@@ -27,13 +27,10 @@ jobs:
           /tmp/gradle-dist/gradle-8.4/bin/gradle wrapper --gradle-version 8.4
           chmod +x gradlew
 
-      - name: Mipmap icon dosyalarını temizle
-        run: find app/src/main/res/mipmap-* -name "*.xml" -delete
-
       - name: APK derle
         run: ./gradlew assembleRelease
-
-        - name: APK konumunu bul
+        
+      - name: APK konumunu bul
         run: find app/build/outputs -name "*.apk" 2>/dev/null || echo "APK bulunamadı"
 
       - name: APK'yı artifact olarak yükle
