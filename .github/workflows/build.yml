@@ -32,8 +32,11 @@ jobs:
       - name: APK dosyalarını listele
         run: find app/build/outputs -type f -name "*.apk"
 
+      - name: APK dosyasını bul
+        run: find . -type f -name "*.apk" -print
+
       - name: APK'yı artifact olarak yükle
         uses: actions/upload-artifact@v4
         with:
           name: release-apk
-          path: app/build/outputs/**/*.apk
+          path: "**/*.apk"
