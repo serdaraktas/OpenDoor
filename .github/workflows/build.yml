@@ -29,7 +29,10 @@ jobs:
 
       - name: Mipmap icon dosyalarını temizle
         run: |
-          find app/src/main/res/mipmap-* -type f -name "*.xml" -delete || true
+          find app/src/main/res/mipmap-* -name "*.xml" -delete
+          sed -i 's|android:icon="@mipmap/ic_launcher"|android:icon="@drawable/ic_launcher_foreground"|g' app/src/main/AndroidManifest.xml
+          sed -i '/android:roundIcon/d' app/src/main/AndroidManifest.xml
+          echo "Temizleme tamamlandı"
 
       - name: APK derle
         run: gradle assembleDebug --no-daemon
